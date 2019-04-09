@@ -1,0 +1,15 @@
+{
+  "name": "node-websocket",
+  "version": "1.0.0",
+  "description": "node websocket app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kushal",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "ws": "^6.2.1"
+  }
+}

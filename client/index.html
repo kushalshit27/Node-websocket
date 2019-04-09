@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Tahoma, Geneva, sans-serif;
+      }
+      div {
+        display: inline;
+      }
+    </style>
+    <script>
+      function updateStats(data) {
+        document.getElementById('time').innerHTML = data;
+      }
+      var host = window.document.location.host.replace(/:.*/, '');
+      var ws = new WebSocket('ws://' + host + ':8080');
+      ws.onmessage = function (event) {
+        //console.log(event)
+        updateStats(JSON.parse(event.data));
+      };
+    </script>
+  </head>
+  <body>
+    <strong>Server Stats</strong><br>
+    Time: <div id='time'></div><br>
+  </body>
+</html>
