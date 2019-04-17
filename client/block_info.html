@@ -12,14 +12,15 @@
     <script>
       function updateStats(data) {
         document.getElementById('time').innerHTML = data.dateTime;
-    
-        blockNumber = parseInt(data.blockchain, 16)
-        document.getElementById('b-total').innerHTML = blockNumber;
-        tableRow = '<table style="width:100%"><tr><th>Block No.</th><th>Block address.</th></tr>';  
-        for (block = blockNumber; block >= 0  ; block--) {
-          blockHex = "0x"+block.toString(16)
-          tableRow += '<tr><td>'+block+'</td> <td> <a href="block/'+blockHex+'" target="_blank">'+blockHex+'</a> </td></tr>'
-        }  
+        //document.getElementById('bHash').innerHTML = '<h1>Hi'+data.dateTime+ '</h1>';
+        
+        tableRow = '<table style="width:100%"><tr><th>Block hash</th><th>Timestamp</th> <th>Size</th> <th>Block No.</th></tr>';
+        data.blockchain.forEach(element => {
+          decimalTime = parseInt(element.timestamp, 16).toString()
+          time = parseInt(decimalTime.substring(0, 13));
+          blocktime = new Date(time)
+          tableRow += '<tr><td>'+element.hash+'</td><td>'+blocktime+'</td> <td>'+parseInt(element.size, 16)+'</td><td>'+parseInt(element.number, 16)+'</td></tr>'
+        });
         tableRow += '</table>'
         document.getElementById('tableData').innerHTML = tableRow;
       }
@@ -34,7 +35,7 @@
   <body>
     <strong>Server Stats</strong><br>
     Time: <div id='time'></div><br>
-    Total Blocks : <div id='b-total'></div><br>
+    <!-- Block Hash: <div id='bHash'></div><br> -->
     <div id='tableData'></div><br>
 
 
